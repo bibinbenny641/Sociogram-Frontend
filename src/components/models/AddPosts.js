@@ -20,7 +20,7 @@ function AddPosts({newpost,setNewpost}) {
   const handleShow = () => setShow(true);
   const  format = ['jpeg','png','jpg']
 
-  const {user} = useContext(AuthContext)
+  const {user,url} = useContext(AuthContext)
 
 
   let PostAdd = async(e)=>{
@@ -31,7 +31,7 @@ function AddPosts({newpost,setNewpost}) {
     formData.append('caption',caption)
     console.log("mmmmmm")
     console.log(file)
-    let response = await fetch(`http://127.0.0.1:8000/follow/addposts/${user.user_id}/`,{
+    let response = await fetch(url+`/follow/addposts/${user.user_id}/`,{
         method:'POST',
         // headers:{
         //     'Content-Type':'multipart/form-data'

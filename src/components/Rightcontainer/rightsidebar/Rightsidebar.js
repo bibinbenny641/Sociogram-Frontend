@@ -15,12 +15,12 @@ const Rightsidebar = () => {
   let [authTokens, setAuthTokens] = useState(() => localStorage.getItem('authTokens') ? localStorage.getItem('authTokens') : null)
   let [suggesteduser, setSuggesteduser] = useState([])
   let [followbackusers, setFollowbackusers] = useState([])
-  let { viewfollower, viewfollowing, setViewfollower, setViewfollowing, result, setResult } = useContext(AuthContext)
+  let { viewfollower, viewfollowing, setViewfollower, setViewfollowing, result, setResult,url } = useContext(AuthContext)
 
 
 
   let followSuggestion = async () => {
-    let response = await fetch(`http://127.0.0.1:8000/follow/suggestion/${user.user_id}/`, {
+    let response = await fetch(url+`/follow/suggestion/${user.user_id}/`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -32,18 +32,17 @@ const Rightsidebar = () => {
 
     if (response.status === 201) {
       setSuggesteduser(data)
-      console.log(suggesteduser, 'sss')
 
 
     } else {
-      // logoutUser()
+      logoutUser()
 
     }
   }
 
   let followuser = async (id) => {
     console.log(id, 'followuser function')
-    let response = await fetch(`http://127.0.0.1:8000/follow/follow_a_user/${user.user_id}/${id}/`, {
+    let response = await fetch(url+`/follow/follow_a_user/${user.user_id}/${id}/`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -55,18 +54,16 @@ const Rightsidebar = () => {
 
     if (response.status === 200) {
       toast.success(data['hai'])
-
-
+      followSuggestion()
 
     } else {
-      // logoutUser()
+      logoutUser()
       // alert('failed')
 
     }
   }
   let followback = async (id) => {
-    console.log(id, 'followuser function')
-    let response = await fetch(`http://127.0.0.1:8000/follow/follow_back_users/${user.user_id}/`, {
+    let response = await fetch(url+`/follow/follow_back_users/${user.user_id}/`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -78,6 +75,7 @@ const Rightsidebar = () => {
 
     if (response.status === 200) {
       setFollowbackusers(data)
+      console.log(followbackusers)
       // alert('success')
 
 
@@ -96,13 +94,14 @@ const Rightsidebar = () => {
 
   useEffect(() => {
     followSuggestion()
-    followback()
+    // followback()
 
   }, [])
 
 
 
   return (
+    <>
     <div className="rightBar">
       <div className="container">
         {/* <div className="item">
@@ -110,7 +109,7 @@ const Rightsidebar = () => {
 
           
           {
-            result.map((i, index) => (
+            followbackusers.map((i, index) => (
 
               <div key={index} className="user">
 
@@ -120,7 +119,7 @@ const Rightsidebar = () => {
                     alt=""
                   />
 
-                  <span >{i.fullname}</span>
+                  <span >{i.firstUname}</span>
                 </div>
 
                 <div className="buttons">
@@ -164,121 +163,12 @@ const Rightsidebar = () => {
 
         </div>
 
-        {/* <div className="item">
-          <span>Online Friends</span>
-          <div className="user">
-            <div className="userInfo">
-              <img
-                src="https://images.pexels.com/photos/4881619/pexels-photo-4881619.jpeg?auto=compress&cs=tinysrgb&w=1600"
-                alt=""
-              />
-              <div className="online" />
-              <span>Jane Doe</span>
-            </div>
-          </div>
-          <div className="user">
-            <div className="userInfo">
-              <img
-                src="https://images.pexels.com/photos/4881619/pexels-photo-4881619.jpeg?auto=compress&cs=tinysrgb&w=1600"
-                alt=""
-              />
-              <div className="online" />
-              <span>Jane Doe</span>
-            </div>
-          </div>
-          <div className="user">
-            <div className="userInfo">
-              <img
-                src="https://images.pexels.com/photos/4881619/pexels-photo-4881619.jpeg?auto=compress&cs=tinysrgb&w=1600"
-                alt=""
-              />
-              <div className="online" />
-              <span>Jane Doe</span>
-            </div>
-          </div>
-          <div className="user">
-            <div className="userInfo">
-              <img
-                src="https://images.pexels.com/photos/4881619/pexels-photo-4881619.jpeg?auto=compress&cs=tinysrgb&w=1600"
-                alt=""
-              />
-              <div className="online" />
-              <span>Jane Doe</span>
-            </div>
-          </div>
-          <div className="user">
-            <div className="userInfo">
-              <img
-                src="https://images.pexels.com/photos/4881619/pexels-photo-4881619.jpeg?auto=compress&cs=tinysrgb&w=1600"
-                alt=""
-              />
-              <div className="online" />
-              <span>Jane Doe</span>
-            </div>
-          </div>
-          <div className="user">
-            <div className="userInfo">
-              <img
-                src="https://images.pexels.com/photos/4881619/pexels-photo-4881619.jpeg?auto=compress&cs=tinysrgb&w=1600"
-                alt=""
-              />
-              <div className="online" />
-              <span>Jane Doe</span>
-            </div>
-          </div>
-          <div className="user">
-            <div className="userInfo">
-              <img
-                src="https://images.pexels.com/photos/4881619/pexels-photo-4881619.jpeg?auto=compress&cs=tinysrgb&w=1600"
-                alt=""
-              />
-              <div className="online" />
-              <span>Jane Doe</span>
-            </div>
-          </div>
-          <div className="user">
-            <div className="userInfo">
-              <img
-                src="https://images.pexels.com/photos/4881619/pexels-photo-4881619.jpeg?auto=compress&cs=tinysrgb&w=1600"
-                alt=""
-              />
-              <div className="online" />
-              <span>Jane Doe</span>
-            </div>
-          </div>
-          <div className="user">
-            <div className="userInfo">
-              <img
-                src="https://images.pexels.com/photos/4881619/pexels-photo-4881619.jpeg?auto=compress&cs=tinysrgb&w=1600"
-                alt=""
-              />
-              <div className="online" />
-              <span>Jane Doe</span>
-            </div>
-          </div>
-          <div className="user">
-            <div className="userInfo">
-              <img
-                src="https://images.pexels.com/photos/4881619/pexels-photo-4881619.jpeg?auto=compress&cs=tinysrgb&w=1600"
-                alt=""
-              />
-              <div className="online" />
-              <span>Jane Doe</span>
-            </div>
-          </div>
-          <div className="user">
-            <div className="userInfo">
-              <img
-                src="https://images.pexels.com/photos/4881619/pexels-photo-4881619.jpeg?auto=compress&cs=tinysrgb&w=1600"
-                alt=""
-              />
-              <div className="online" />
-              <span>Jane Doe</span>
-            </div>
-          </div>
-        </div> */}
+
+        
       </div>
     </div>
+    
+    </>
   );
 };
 

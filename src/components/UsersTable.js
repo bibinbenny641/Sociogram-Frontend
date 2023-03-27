@@ -14,6 +14,7 @@ import {
   TableCaption,
   TableContainer,
 } from '@chakra-ui/react'
+import DeleteIcon from '@mui/icons-material/Delete';
 import {
   Tag,
   Button
@@ -25,7 +26,7 @@ function UsersTable() {
   let navigate = useNavigate()
 
   let [authTokens, setAuthTokens] = useState(() => localStorage.getItem('authTokens') ? localStorage.getItem('authTokens') : null)
-  let { logoutAdmin } = useContext(AuthContext)
+  let { logoutAdmin,url } = useContext(AuthContext)
   const [list, setList] = useState([])
   useEffect(() => {
     setAuthTokens(localStorage.getItem('authTokens') ? localStorage.getItem('authTokens') : null)
@@ -35,21 +36,15 @@ function UsersTable() {
   // let {authTokens}=useContext(AuthContext)
   let userlist = async () => {
 
-    console.log(String(JSON.parse(authTokens).access) + 'jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj')
-    let response = await fetch('http://127.0.0.1:8000/adminside/users/', {
+    let response = await fetch(url+'/adminside/users/', {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
         Authorization: `Bearer  ${String(JSON.parse(authTokens).access)}`
       },
-
-
-
     })
     let data = await response.json()
-    console.log(data)
-
-    console.log("bbbbbbbbbbbb bb b b b b b")
+    
     if (response.status === 200) {
       setList(data.data)
 
@@ -59,26 +54,19 @@ function UsersTable() {
       navigate('/admin')
 
     }
-
-
   }
 
-  let control = async (obj_id) => {
+  let deleteuser = async (obj_id) => {
     console.log(obj_id)
-    let response = await fetch(`http://127.0.0.1:8000/adminside/block/${obj_id}/`, {
+    let response = await fetch(url+`/adminside/delete/${obj_id}/`, {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
         Authorization: `Bearer  ${String(JSON.parse(authTokens).access)}`
       },
-
-
-
     })
-    let data = await response.json()
-    console.log(data)
-    if (response.status === 200) {
-      console.log("havuuuu")
+    await response.json()
+    if (response.status === 202) {
       userlist()
 
     } else {
@@ -86,6 +74,31 @@ function UsersTable() {
     }
 
   }
+
+
+  let control = async (obj_id) => {
+    console.log(obj_id)
+    let response = await fetch(url+`/adminside/block/${obj_id}/`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer  ${String(JSON.parse(authTokens).access)}`
+      },
+    })
+    let data = await response.json()
+    console.log(data)
+    if (response.status === 200) {
+      userlist()
+
+    } else {
+      alert("Something went wrong tto!!")
+    }
+
+  }
+  useEffect(() => {
+    userlist()
+  }, [list])
+  
 
   return (
     <div>
@@ -123,7 +136,11 @@ function UsersTable() {
                     <Td> <Button colorScheme='red' onClick={() => control(obj.id)} >Block</Button>{' '}</Td> :
                     <Td> <Button colorScheme='green' onClick={() => control(obj.id)}>Unblock</Button>{' '}</Td>
                 }
-
+                <Td>
+                  <Button>
+                    <DeleteIcon onClick={()=>deleteuser(obj.id)}/>
+                  </Button>
+                </Td>
 
               </Tr>
             )

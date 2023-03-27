@@ -10,16 +10,12 @@ import EditComment from "./edit/EditComment";
 
 
 const Comments = ({foll}) => {
-  let {user} = useContext(AuthContext)
-  
-
+  let {user,url} = useContext(AuthContext)
   let navigate = useNavigate()
   let [authTokens, setAuthTokens] = useState(() => localStorage.getItem('authTokens') ? localStorage.getItem('authTokens') : null)
   const [postcomment,setPostcomment] = useState([])
   const [editinputopen,setEditinputopen] = useState(false)
-  console.log(postcomment,'hhahah')
   const [datas,setDatas] = useState('')
-  console.log(datas,'3333333333333')
   
 
   const [values,setValues] = useState('')
@@ -30,12 +26,11 @@ const Comments = ({foll}) => {
         ...values,
         [e.target.name]:e.target.value})
 
-
   }
 
 
   let addcomment = async () => {
-    let response = await fetch(`http://127.0.0.1:8000/follow/addcomments/${user.user_id}/${foll.id}/`, {
+    let response = await fetch(url+`/follow/addcomments/${user.user_id}/${foll.id}/`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -63,7 +58,7 @@ const Comments = ({foll}) => {
   let comm = async ()=>{
     console.log(foll.id,'jaj')
 
-    let response = await fetch(`http://127.0.0.1:8000/follow/getcomments/${foll.id}/`, {
+    let response = await fetch(url+`/follow/getcomments/${foll.id}/`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -91,7 +86,7 @@ const Comments = ({foll}) => {
     console.log(id)
 
 
-    let response = await fetch(`http://127.0.0.1:8000/follow/editcomment/${id}/`, {
+    let response = await fetch(url+`/follow/editcomment/${id}/`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -116,7 +111,7 @@ const Comments = ({foll}) => {
   
   let deleteComment = async (id)=>{
 
-    let response = await fetch(`http://127.0.0.1:8000/follow/deletecomment/${id}/`, {
+    let response = await fetch(url+`/follow/deletecomment/${id}/`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

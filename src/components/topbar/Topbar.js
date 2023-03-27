@@ -17,7 +17,7 @@ import Results from "../results/Results";
 // import { Menu } from "@mui/material";
 
 const Topbar = () => {
-  let {user} = useContext(AuthContext)
+  let {user,url} = useContext(AuthContext)
   let {logoutUser} = useContext(AuthContext)
   let [authTokens, setAuthTokens] = useState(() => localStorage.getItem('authTokens') ? localStorage.getItem('authTokens') : null)
   let {result,setResult} = useContext(AuthContext)
@@ -33,7 +33,7 @@ const Topbar = () => {
   let search = async () => {
 
     
-    let response = await fetch(`http://127.0.0.1:8000/follow/searching`, {
+    let response = await fetch(url+`/follow/searching`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

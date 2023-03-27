@@ -4,7 +4,7 @@ import { toast } from "react-toastify";
 import AuthContext from "../../context/AuthContext";
 import "./share.css";
 import AddPhotoAlternateOutlinedIcon from '@mui/icons-material/AddPhotoAlternateOutlined';
-import { position } from "@chakra-ui/react";
+import { Input, position } from "@chakra-ui/react";
 
 const Share = () => {
   const generateError = (err) =>
@@ -13,7 +13,7 @@ const Share = () => {
     })
 
   let user = useContext(AuthContext)
-  let {added,setAdded} = useContext(AuthContext)
+  let {added,setAdded,url} = useContext(AuthContext)
 
   let u = user.user.user_id
   let navigate = useNavigate()
@@ -21,6 +21,7 @@ const Share = () => {
   const [preview, setPreview] = useState()
   const [file, setFile] = useState(null)
   const [caption, setCaption] = useState('')
+  const [isDone,setIsDone] = useState(false)
 
   let PostAdd = async (e) => {
     e.preventDefault()
@@ -32,7 +33,7 @@ const Share = () => {
       toast.error(`Cannot add an empty post`,{theme:"dark"},{position:'top-right'})
     } else {
 
-      let response = await fetch(`http://127.0.0.1:8000/follow/addposts/${u}`, {
+      let response = await fetch(url+`/follow/addposts/${u}`, {
         method: 'POST',
         body: formData,
         headers: {
@@ -46,6 +47,7 @@ const Share = () => {
       if (response.status === 200){
         console.log(data)
         setAdded(true)
+        setIsDone(true)
         toast.success('successfully added post')
       }
       else if(response.status === 400) {
@@ -57,6 +59,10 @@ const Share = () => {
       }
     }
   }
+  useEffect(() => {
+    setCaption('')
+  }, [isDone])
+  
 
 
   useEffect(() => {
@@ -72,7 +78,7 @@ const Share = () => {
     return () => URL.revokeObjectURL(objectUrl)
 
 
-  }, [file,added])
+  }, [file,added,caption])
 
   const setImage = (e) => {
     setFile(e.target.files[0])
@@ -90,7 +96,7 @@ const Share = () => {
               src="https://cdn-icons-png.flaticon.com/512/21/21104.png"
               alt=""
             />
-            <input style={{ background: 'white', borderRadius: "30px" }} onChange={(e) => { setCaption(e.target.value) }} name='caption' type="text" placeholder="Enter your thoughts" />
+            <Input style={{ background: 'white', borderRadius: "30px" }} onChange={(e) => { setCaption(e.target.value) }} name='caption' value={caption.caption} type="text" placeholder="Enter your thoughts" />
           </div>
           <hr />
           <div className="bottom">
@@ -108,8 +114,8 @@ const Share = () => {
               </label>
               {
                 preview ?
-                  <div style={{ height: '50px', width: '50px', background: 'green' }} className="item">
-                    <img src={preview} alt="ghytgkl[kp[kp[pok" />
+                  <div style={{ height: '50px', width: '50px',  }} className="item">
+                    <img src={preview} alt="" />
                   </div> :
                   null
               }

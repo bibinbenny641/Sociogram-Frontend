@@ -84,7 +84,9 @@ const HomePage = () => {
                                 } />
 
 
-                            <Card maxW='700px' paddingTop={50}>
+                            <Card style={{width:'45vh'}}
+                            //  maxW='800px' 
+                             paddingTop={50}>
                                 <CardHeader>
                                     <Flex spacing='4'>
                                         <Flex flex='1' gap='4' alignItems='center' flexWrap='wrap'>
@@ -147,7 +149,7 @@ const HomePage = () => {
                             <Divider variant="thick" colorScheme="brand" />
 
 
-                            <Card maxW='700px'>
+                            <Card maxW='880px'>
                                 <CardHeader >
                                     <Flex spacing='4'>
                                         <Flex flex='1' gap='4' alignItems='center' flexWrap='wrap'>

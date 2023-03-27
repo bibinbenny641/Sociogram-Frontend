@@ -10,14 +10,14 @@ function Chats() {
   // const [roomid, setRoomid] = useState([]);
 
   let [authTokens, setAuthTokens] = useState(() => localStorage.getItem('authTokens') ? localStorage.getItem('authTokens') : null)
-  let { user } = useContext(AuthContext)
+  let { user,url } = useContext(AuthContext)
   let {logoutUser} = useContext(AuthContext)
   let {MessageDetails} = useContext(AuthContext)
   let {roomid, setRoomid,isopen,setIsopen} = useContext(AuthContext)
 
 
   let chatlist = async () => {
-    let response = await fetch(`http://127.0.0.1:8000/chat/chatlists/${user.user_id}`, {
+    let response = await fetch(url+`/chat/chatlists/${user.user_id}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -42,7 +42,7 @@ function Chats() {
   }
   let createroom = async (usersid) => {
 
-    let response = await fetch(`http://127.0.0.1:8000/chat/create_or_find_room/${user.user_id}/${usersid}`, {
+    let response = await fetch(url+`/chat/create_or_find_room/${user.user_id}/${usersid}`, {
       method: 'GET',
       headers: { 
         'Content-Type': 'application/json',

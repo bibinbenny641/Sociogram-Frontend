@@ -2,31 +2,24 @@ import React, { useContext, useEffect, useState } from 'react'
 import { Tabs, TabList, TabPanels, Tab, TabPanel, Card } from '@chakra-ui/react'
 import AuthContext from '../../context/AuthContext'
 import { toast } from "react-toastify";
-
-
 import {
     List,
     ListItem,
     ListIcon,
 
 } from '@chakra-ui/react'
-
 import { Badge, Stack } from '@chakra-ui/react'
 import { Flex, Spacer, Box } from '@chakra-ui/react'
 import { Button, ButtonGroup } from '@chakra-ui/react'
 import { useNavigate } from 'react-router-dom';
 
-
-
 function Friends() {
     let [authTokens, setAuthTokens] = useState(() => localStorage.getItem('authTokens') ? localStorage.getItem('authTokens') : null)
-    let { user } = useContext(AuthContext)
-    console.log(user.user_id, 'hahahah')
+    let { user,url } = useContext(AuthContext)
     const navigate = useNavigate()
 
     const [follower, setFollower] = useState([])
     const [following, setFollowing] = useState([])
-    console.log(follower, following)
 
 
     const profile = (id) => {
@@ -38,7 +31,7 @@ function Friends() {
 
     let getPeoples = async () => {
 
-        let response = await fetch(`http://127.0.0.1:8000/follow/follow/${user.user_id}/`, {
+        let response = await fetch(url+`/follow/follow/${user.user_id}/`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -58,8 +51,7 @@ function Friends() {
 
     }
     let unfollow = async (id) => {
-        console.log(id, 'followuser function')
-        let response = await fetch(`http://127.0.0.1:8000/follow/follow_a_user/${user.user_id}/${id}/`, {
+        let response = await fetch(url+`/follow/follow_a_user/${user.user_id}/${id}/`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -70,7 +62,6 @@ function Friends() {
         let data = await response.json()
 
         if (response.status === 200) {
-            console.log(data['hai'])
             toast.success(data['hai'])
             getPeoples()
 

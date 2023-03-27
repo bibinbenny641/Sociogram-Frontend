@@ -7,12 +7,12 @@ import { toast } from "react-toastify";
 
 function Suggestions() {
     let { user } = useContext(AuthContext)
-    let { logoutUser } = useContext(AuthContext)
+    let { logoutUser,url } = useContext(AuthContext)
 
     let [authTokens, setAuthTokens] = useState(() => localStorage.getItem('authTokens') ? localStorage.getItem('authTokens') : null)
     let [suggesteduser, setSuggesteduser] = useState([])
     let followSuggestion = async () => {
-        let response = await fetch(`http://127.0.0.1:8000/follow/suggestion/${user.user_id}/`, {
+        let response = await fetch(url+`/follow/suggestion/${user.user_id}/`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
@@ -24,7 +24,6 @@ function Suggestions() {
     
         if (response.status === 201) {
           setSuggesteduser(data)
-          console.log(suggesteduser, '1111111111111111111')
     
     
         } else {
@@ -34,7 +33,7 @@ function Suggestions() {
       } 
       let followuser = async (id) => {
         console.log(id, 'followuser function')
-        let response = await fetch(`http://127.0.0.1:8000/follow/follow_a_user/${user.user_id}/${id}/`, {
+        let response = await fetch(url+`/follow/follow_a_user/${user.user_id}/${id}/`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

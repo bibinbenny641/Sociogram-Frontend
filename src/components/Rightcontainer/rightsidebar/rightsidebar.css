@@ -1,10 +1,10 @@
 .theme-light .rightBar {
-    flex: 3;
+    flex: 1;
     position: -webkit-sticky;
     position: sticky;
     top: 70px;
     height: calc(100vh - 70px);
-    height:75vh;
+    /* height:75vh; */
     width: 40px;
     overflow: scroll;
     background-color: #f6f3f3;
@@ -24,12 +24,15 @@
   }
   .theme-light .rightBar .container {
     padding: 20px;
+    /* margin-left: 10vh; */
+    max-width: 50vh;
   }
   .theme-light .rightBar .container .item {
     box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.09);
     padding: 20px;
     margin-bottom: 20px;
     background-color: white;
+    border-radius: 20px;
   }
   .theme-light .rightBar .container .item span {
     color: gray;

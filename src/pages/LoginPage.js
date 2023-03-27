@@ -91,7 +91,6 @@ const LoginPage = () => {
     useEffect(() => {
 
         if(auth){
-            console.log("user ind     bbbbbbbbbbbbbbbbbbb");
             window.location.replace("/")        }
 
         

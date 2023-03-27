@@ -25,14 +25,14 @@ function PostTable() {
   let navigate = useNavigate()
 
   let [authTokens, setAuthTokens] = useState(() => localStorage.getItem('authTokens') ? localStorage.getItem('authTokens') : null)
-  let { logoutAdmin } = useContext(AuthContext)
+  let { logoutAdmin,url } = useContext(AuthContext)
   const [postlist, setPostlist] = useState([])
   console.log(postlist,"jjdjjdjdjdjdj")
   
   let post = async () => {
 
     console.log(String(JSON.parse(authTokens).access) + 'jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj')
-    let response = await fetch('http://127.0.0.1:8000/follow/adminpost/', {
+    let response = await fetch(url+'/follow/adminpost/', {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -63,7 +63,7 @@ function PostTable() {
 
   let handleClick = async (obj_id) => {
     console.log(obj_id)
-    let response = await fetch(`http://127.0.0.1:8000/follow/deletePostAdmin/${obj_id}/`, {
+    let response = await fetch(url+`/follow/deletePostAdmin/${obj_id}/`, {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
@@ -114,7 +114,7 @@ function PostTable() {
 
                   obj.postImage != "/media/null" ?
                   <Td>
-                    <img className='rounded' style={{height:'70px',widows:"50px"}} src={`http://127.0.0.1:8000${obj.postImage}`}></img>
+                    <img className='rounded' style={{height:'70px',widows:"50px"}} src={url+`${obj.postImage}`}></img>
                   
                 </Td>:
                 <Td>

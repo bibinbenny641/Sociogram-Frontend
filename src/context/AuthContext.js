@@ -30,6 +30,7 @@ export const AuthProvider = ({children}) =>{
     const [isopen,setIsopen] = useState(false)
     const [result,setResult]=useState([''])
   const [caption,setCaption] = useState([])
+  const url = 'http://127.0.0.1:8000'
 
 
  
@@ -41,7 +42,7 @@ export const AuthProvider = ({children}) =>{
         e.preventDefault()
         console.log("form submitted")
         
-        let response = await fetch('http://127.0.0.1:8000/api/token/',{
+        let response = await fetch(url+'/api/token/',{
             method : 'POST',
             headers:{
                 'Content-Type':'application/json'
@@ -76,7 +77,6 @@ export const AuthProvider = ({children}) =>{
         
         localStorage.removeItem('authTokens')
         
-        console.log("jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj")
         navigate("/login",{replace:true})
     }
 
@@ -84,10 +84,9 @@ export const AuthProvider = ({children}) =>{
     //....................adminlogin......................
 
     let loginAdmin = async(e)=>{
-        console.log("hhhh")
         e.preventDefault()
         console.log("admin form submitted")
-        let response = await fetch('http://127.0.0.1:8000/api/token/',{
+        let response = await fetch(url+'/api/token/',{
             method : 'POST',
             headers:{
                 'Content-Type':'application/json'
@@ -97,7 +96,6 @@ export const AuthProvider = ({children}) =>{
         })
         let data = await response.json()
         if(response.status === 200){
-            console.log("ffffffffffffffffffff")
             setAuthTokens(data)
             setUser(jwt_decode(data.access))
             localStorage.setItem('authTokens',JSON.stringify(data))
@@ -120,7 +118,6 @@ export const AuthProvider = ({children}) =>{
 
     let MessageDetails = (chat) =>{
         setMessageDetail(chat)
-        console.log(messageDetail,'zzzzzzzzzzzzzzzz')
     }
 
     
@@ -146,7 +143,7 @@ export const AuthProvider = ({children}) =>{
         setViewfollowing:setViewfollowing,
         viewfollower:viewfollower,
         setViewfollower:setViewfollower,isopen:isopen,setIsopen:setIsopen,
-        result:result,setResult:setResult,caption:caption,setCaption:setCaption,
+        result:result,setResult:setResult,caption:caption,setCaption:setCaption,url:url,
 
         
     }

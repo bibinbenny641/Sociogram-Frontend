@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 
 
 function EditComment({com,editComment,comm,datas,setDatas,foll}) {
-  let { caption,setCaption } = useContext(AuthContext)
+  let { caption,setCaption,url } = useContext(AuthContext)
   let [authTokens, setAuthTokens] = useState(() => localStorage.getItem('authTokens') ? localStorage.getItem('authTokens') : null)
 
 
@@ -29,7 +29,7 @@ function EditComment({com,editComment,comm,datas,setDatas,foll}) {
       let editPost = async (id) => {
         console.log(id,'333')
         console.log(caption,'22222')
-        let response = await fetch(`http://127.0.0.1:8000/follow/editpost/${id}/`, {
+        let response = await fetch(url+`/follow/editpost/${id}/`, {
           method: 'PATCH', 
           headers: {
             'Content-Type': 'application/json',

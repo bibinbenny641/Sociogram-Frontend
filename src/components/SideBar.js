@@ -3,47 +3,58 @@ import React, { useState,useContext } from 'react'
 import './sidebar.css'
 import { Link } from 'react-router-dom';
 import AuthContext from '../context/AuthContext';
- 
+import HomeIcon from '@mui/icons-material/Home';
+import ChatBubbleIcon from '@mui/icons-material/ChatBubble';
+import PersonPinIcon from '@mui/icons-material/PersonPin';
+import GroupIcon from '@mui/icons-material/Group';
 function SideBar() {
   let {user,logoutUser} = useContext(AuthContext)
 
   return (
     // 
     <>
-
-
+    <div className='maindiv'>
       <div className="leftBar">
       <div className="container">
         <div className="menu">
-          <div className="user">
+          {/* <div className="user">
+            <h1>Sociogram</h1>
             
-          </div>
+          </div> */}
+            <Link to={'/'}>
           <div className="item">
             <img src='' alt="" />
-            <Link to={'/'}>
+            <span><HomeIcon/></span>
 
             <span>Home</span>
-            </Link>
           </div>
-          <div className="item">
-            <img src='' alt="" />
+            </Link>
             <Link to={'/message'}>
+          <div className="item">
+            <img src='' alt="" />
+            <span><ChatBubbleIcon/></span>
 
-            <span>messages</span>
-            </Link>
+            <span>Messages</span>
           </div>
-          <div className="item">
-            <img src='' alt="" />
+            </Link>
             <Link to={`/profile/${user.user_id}`}>
-            <span>My Profile</span>
-            </Link>
-          </div>
           <div className="item">
             <img src='' alt="" />
-            <Link to={'/people'}>
-            <span>Peoples</span>
-            </Link>
+            <span><PersonPinIcon/></span>
+
+            <span>My Profile</span>
           </div>
+            </Link>
+            <Link to={'/people'}>
+          <div className="item">
+            <img src='' alt="" />
+            <span><GroupIcon/></span>
+
+            <span>Peoples</span>
+          </div>
+            </Link>
+          
+          
           {/* <div className="item">
             <img src='https://cdn-icons-png.flaticon.com/512/21/21104.png' alt="" />
             <span>Watch</span>
@@ -53,33 +64,11 @@ function SideBar() {
             <span onClick={logoutUser}>LogOut</span>
           </div> */}
         </div>
-        <hr />
-        {/* <div className="menu">
-          <span>Your shortcuts</span>
-          <div className="item">
-            <img src='' alt="" />
-            <span>Events</span>
-          </div>
-          <div className="item">
-            <img src='' alt="" />
-            <span>Gaming</span>
-          </div>
-          <div className="item">
-            <img src='' alt="" />
-            <span>Gallery</span>
-          </div>
-          <div className="item">
-            <img src='' alt="" />
-            <span>Videos</span>
-          </div>
-          <div className="item">
-            <img src='' alt="" />
-            <span>Messages</span>
-          </div>
-        </div> */}
-        <hr />
+        
+       
         
       </div>
+    </div>
     </div>
     </>
 

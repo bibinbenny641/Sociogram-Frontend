@@ -66,7 +66,7 @@ function UserProfile() {
   const [usersfollowing, setUsersfollowing] = useState(false)
   const [isfollowing,setIsfollowing] = useState([])
   const [isedit,setIsedit] = useState(false)
-  let { viewfollower, viewfollowing, setViewfollower, setViewfollowing,caption,setCaption } = useContext(AuthContext)
+  let { viewfollower, viewfollowing, setViewfollower, setViewfollowing,caption,setCaption,url } = useContext(AuthContext)
 
   const { usersid } = useParams();
   const [loading, setLoading] = useState(true)
@@ -85,7 +85,7 @@ function UserProfile() {
   }
   const navigate = useNavigate()
   let userlist = async (usersid) => {
-    let response = await fetch(`http://127.0.0.1:8000/api/profile/${usersid}`, {
+    let response = await fetch(url+`/api/profile/${usersid}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -104,7 +104,7 @@ function UserProfile() {
 
   }
   let folow = async (usersid) => {
-    let response = await fetch(`http://127.0.0.1:8000/follow/follow/${usersid}/`, {
+    let response = await fetch(url+`/follow/follow/${usersid}/`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -130,7 +130,7 @@ function UserProfile() {
   }
 
   let usersPosts = async () => {
-    let response = await fetch(`http://127.0.0.1:8000/follow/userpost/${usersid}/`, {
+    let response = await fetch(url+`/follow/userpost/${usersid}/`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -154,7 +154,7 @@ function UserProfile() {
 
 
   let is_follow = async () => {
-    let response = await fetch(`http://127.0.0.1:8000/follow/check_user/${user.user_id}/${usersid}/`, {
+    let response = await fetch(url+`/follow/check_user/${user.user_id}/${usersid}/`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -173,7 +173,7 @@ function UserProfile() {
     }
   }
   let followuser = async () => {
-    let response = await fetch(`http://127.0.0.1:8000/follow/follow_a_user/${user.user_id}/${usersid}/`, {
+    let response = await fetch(url+`/follow/follow_a_user/${user.user_id}/${usersid}/`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -324,7 +324,9 @@ function UserProfile() {
               </Badge>
             </Stack>
             <Stack align={'center'} justify={'center'} direction={'row'} mt={6}>
-              <Badge onClick={() => (follvr())} px={4}
+              <Badge
+              //  onClick={() => (follvr())}
+               px={4}
                 py={1}
                 bg={useColorModeValue('gray.50', 'gray.800')}
                 fontWeight={'400'}
@@ -334,7 +336,9 @@ function UserProfile() {
                 <br></br>
                 <span><strong>{follower}</strong></span>
               </Badge>
-              <Badge onClick={() => (follving())} px={4}
+              <Badge
+              //  onClick={() => (follving())}
+                px={4}
                 py={1}
                 bg={useColorModeValue('gray.50', 'gray.800')}
                 fontWeight={'400'}
@@ -371,6 +375,7 @@ function UserProfile() {
                   change password
                 </Center>
               } */}
+              
               { isfollowing && usersid != user.user_id ?
 
               <center>

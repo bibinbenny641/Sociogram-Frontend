@@ -1,11 +1,8 @@
 import React, { useContext, useState } from 'react';
-// import Button from 'react-bootstrap/Button';
 import { Button, ButtonGroup } from '@chakra-ui/react'
-// import Modal from 'react-bootstrap/Modal';
 import { MdBuild } from 'react-icons/md';
 import { Link, useNavigate } from 'react-router-dom'
 import AuthContext from '../../context/AuthContext';
-// import './addpost.css'
 import { useDisclosure } from '@chakra-ui/react'
 import { Text } from '@chakra-ui/react'
 import { Input,FormLabel,FormControl } from '@chakra-ui/react'
@@ -20,7 +17,7 @@ import {
 } from '@chakra-ui/react'
 
 function EditProfile({refresh,setRefresh,userdata}) {
-  let {user} = useContext(AuthContext)
+  let {user,url} = useContext(AuthContext)
 
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
@@ -52,7 +49,7 @@ function EditProfile({refresh,setRefresh,userdata}) {
   let editPro = async(e)=>{
     e.preventDefault()
     
-    let response = await fetch(`http://127.0.0.1:8000/api/editpro/${user.user_id}`,{
+    let response = await fetch(url+`/api/editpro/${user.user_id}`,{
         method:'PUT',
         headers:{
             'Content-Type':'application/json'

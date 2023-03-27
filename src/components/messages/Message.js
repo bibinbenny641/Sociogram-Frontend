@@ -11,7 +11,7 @@ import AddPosts from '../models/AddPosts';
 
 function Message() {
   let [authTokens, setAuthTokens] = useState(() => localStorage.getItem('authTokens') ? localStorage.getItem('authTokens') : null)
-  let {logoutUser} = useContext(AuthContext)
+  let {logoutUser,url} = useContext(AuthContext)
     
   const [show, setShow] = useState(false);
   const [userChat, setUserChat] = useState(false);
@@ -30,7 +30,7 @@ function Message() {
 
   let folow = async (id) => {
 
-    let response = await fetch(`http://127.0.0.1:8000/follow/follow/${user.user_id}/`, {
+    let response = await fetch(url+`/follow/follow/${user.user_id}/`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',

@@ -18,7 +18,7 @@ import { Card } from "@chakra-ui/react";
 
 function ChatDetail() {
   let [authTokens, setAuthTokens] = useState(() => localStorage.getItem('authTokens') ? localStorage.getItem('authTokens') : null)
-  let { messageDetail, roomid, user, setIsopen } = React.useContext(AuthContext)
+  let { messageDetail, roomid, user, setIsopen,url } = React.useContext(AuthContext)
   const [messages, setMessages] = useState([])
   const [message, setMessage] = useState([])
   const [isTrue, setIsTrue] = useState(false)
@@ -28,7 +28,7 @@ function ChatDetail() {
   const bottomRef = useRef(null);
   let get_messages = async () => {
 
-    let response = await fetch(`http://127.0.0.1:8000/chat/getMessages/${roomid.id}`, {
+    let response = await fetch(url+`/chat/getMessages/${roomid.id}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
