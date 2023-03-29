@@ -104,7 +104,7 @@ function EditProfile({refresh,setRefresh,userdata}) {
             
             <center>
             
-            <Button style={{margin:'1vh'}} colorScheme='blue' variant='outline'  onClick={onClose} >Save</Button>
+            <Button type='submit' style={{margin:'1vh'}} colorScheme='blue' variant='outline'  onClick={onClose} >Save</Button>
             </center>
             
         </form>

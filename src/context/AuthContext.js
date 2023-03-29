@@ -30,7 +30,7 @@ export const AuthProvider = ({children}) =>{
     const [isopen,setIsopen] = useState(false)
     const [result,setResult]=useState([''])
   const [caption,setCaption] = useState([])
-  const url = 'https://www.sociogram.online'
+  const url = 'http://127.0.0.1:8000'
 
 
  
