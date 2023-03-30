@@ -48,7 +48,7 @@ function ChatDetail() {
   }
   useEffect(() => {
 
-    socketRef.current = new WebSocket(`ws://sociogram.online/ws/chat/${room}/${user.user_id}/`);
+    socketRef.current = new WebSocket(`wss://sociogram.online/ws/chat/${room}/${user.user_id}/`);
 
     socketRef.current.onmessage = (event) => {
       setIsTrue(!isTrue)
