@@ -1,11 +1,14 @@
 .search-results-container{
     background-color: rgb(246, 216, 249);
     position: absolute;
-    margin-top: 10vh;
+    right: 1;
+    margin-top: 29vh;
+    margin-left: 15vh;
     height: auto;
     width: 20vh;
     padding-left: 8vh;
     border-radius: 20px;
+    overflow-block: visible;
     left: 1;
     top: 20;
     /* overflow-y: scroll; */

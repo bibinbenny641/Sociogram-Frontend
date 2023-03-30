@@ -18,11 +18,11 @@ function ProfilePage() {
         <Row>
           <div style={{ display: 'flex' }}>
             <SideBar />
-            <div className='mainhomepage' style={{ position: 'sticky', border:"rounded"}}>
+            {/* <div className='mainhomepage' style={{ position: 'sticky', border:"rounded"}}> */}
 
               <UserProfile />
 
-            </div>
+            {/* </div> */}
             <Rightsidebar />
           </div>
         </Row>

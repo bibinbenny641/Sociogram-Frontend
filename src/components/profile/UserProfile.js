@@ -251,7 +251,7 @@ function UserProfile() {
   return (
 
     <>
-      <div style={{ overflowY: 'scroll' }}>
+      <div style={{ overflowY: 'scroll',marginTop:'15vh' }}>
         <Center py={6}>
           <Box
             maxW={'850px'}
