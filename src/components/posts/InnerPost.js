@@ -20,7 +20,7 @@ import {
     AlertDialogOverlay,
   } from '@chakra-ui/react'
 
-export default function InnerPost({ foll, Comments, postGet,deletePost,caption,setCaption,edit}) {
+export default function InnerPost({ foll, Comments, postGet,deletePost,caption,setCaption,edit,isedited,setIsedited}) {
 
     const [commentOpen, setCommentOpen] = useState(false);
     const [editpostinput,setEditpostinput] = useState(false)
@@ -76,7 +76,7 @@ export default function InnerPost({ foll, Comments, postGet,deletePost,caption,s
                 <CardHeader>
                     <Flex spacing='4'>
                         <Flex flex='1' gap='4' alignItems='center' flexWrap='wrap'>
-                            <Avatar name='Segun Adebayo' src='https://bit.ly/sage-adebayo' />
+                            <Avatar name='Segun Adebayo' src='https://www.pngall.com/wp-content/uploads/5/Profile-Male-PNG.png' />
 
                             <Box >
                                 <Heading size='sm' onClick={() => { userProfile(foll.user) }}>{foll.username}</Heading>
@@ -101,7 +101,8 @@ export default function InnerPost({ foll, Comments, postGet,deletePost,caption,s
                                 </Text>
                             </strong>
                                 <div>
-                                {editpostinput && <EditComment foll={foll} />}
+                                {editpostinput && <EditComment foll={foll} isedited={isedited} setIsedited={setIsedited}
+                                openEdit={openEdit} />}
                                 </div>
                         </CardBody>
                         :

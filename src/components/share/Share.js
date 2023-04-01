@@ -45,7 +45,6 @@ const Share = () => {
       })
       let data = await response.json()
       if (response.status === 200){
-        console.log(data)
         setAdded(true)
         setIsDone(true)
         toast.success('successfully added post')
@@ -72,7 +71,6 @@ const Share = () => {
     }
 
     const objectUrl = URL.createObjectURL(file)
-    console.log(objectUrl);
     setPreview(objectUrl)
 
     return () => URL.revokeObjectURL(objectUrl)

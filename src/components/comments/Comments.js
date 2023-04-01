@@ -56,7 +56,6 @@ const Comments = ({foll}) => {
 
 
   let comm = async ()=>{
-    console.log(foll.id,'jaj')
 
     let response = await fetch(url+`/follow/getcomments/${foll.id}/`, {
       method: 'GET',
@@ -68,7 +67,6 @@ const Comments = ({foll}) => {
     let data = await response.json()
 
     if (response.status === 200) {
-      // console.log(data,'get comments')
       setPostcomment(data)
 
     } else {
@@ -77,13 +75,11 @@ const Comments = ({foll}) => {
     }
   }
   const openeditComment = ((id)=>{
-    console.log(id,'ha')
     setEditinputopen(!editinputopen)
 
   })
 
   let editComment = async (id)=>{
-    console.log(id)
 
 
     let response = await fetch(url+`/follow/editcomment/${id}/`, {
@@ -97,8 +93,6 @@ const Comments = ({foll}) => {
     let data = await response.json()
 
     if (response.status === 200) {
-      // console.log(data,'get comments')
-      console.log(data)
       comm()
       
 
@@ -146,7 +140,7 @@ const Comments = ({foll}) => {
       <div className="scroll_bar"
       //  style={{height:"250px",overflowY:'scroll'}}
        >
-        {console.log(postcomment.id,'zz')}
+        
 
       {postcomment.map((com,i) => (
         

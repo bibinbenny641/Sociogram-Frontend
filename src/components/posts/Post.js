@@ -24,7 +24,7 @@ export default function Post({ setLoading }) {
   const [viewposts, setViewposts] = useState([])
   let { logoutUser,url } = useContext(AuthContext)
   let navigate = useNavigate()
-  console.log(viewposts, 'postsmmmm')
+  const [isedited,setIsedited] = useState(false)
 
 
   let [authTokens, setAuthTokens] = useState(() => localStorage.getItem('authTokens') ? localStorage.getItem('authTokens') : null)
@@ -54,7 +54,6 @@ export default function Post({ setLoading }) {
     }
   }
   let deletePost = async (id) => {
-    console.log(id,'kk')
     let response = await fetch(url+`/follow/deletePostAdmin/${id}/`, {
       method: 'PATCH',
       headers: {
@@ -77,7 +76,7 @@ export default function Post({ setLoading }) {
 
   useEffect(() => {
     postGet()
-  }, [added],)
+  }, [added,isedited],)
 
   return (
     <>
@@ -88,7 +87,8 @@ export default function Post({ setLoading }) {
       {
         viewposts.map((foll, i) => (
           <div key={i}>
-            <InnerPost foll={foll} Comments={Comments} postGet={postGet} viewposts={viewposts} deletePost={deletePost} />
+            <InnerPost foll={foll} Comments={Comments} postGet={postGet} viewposts={viewposts} deletePost={deletePost} isedited={isedited}
+            setIsedited={setIsedited} />
           </div>
 
         ))

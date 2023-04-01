@@ -41,7 +41,6 @@ const Rightsidebar = () => {
   }
 
   let followuser = async (id) => {
-    console.log(id, 'followuser function')
     let response = await fetch(url+`/follow/follow_a_user/${user.user_id}/${id}/`, {
       method: 'POST',
       headers: {
@@ -75,7 +74,6 @@ const Rightsidebar = () => {
 
     if (response.status === 200) {
       setFollowbackusers(data)
-      console.log(followbackusers)
       // alert('success')
 
 
@@ -136,7 +134,6 @@ const Rightsidebar = () => {
 
         </div> */}
         <div className="item" >
-          {console.log(suggesteduser, 'jjsjsjsjs')}
           <span>Suggestions For You</span>
           {
             suggesteduser.map((i, index) => (
@@ -161,6 +158,133 @@ const Rightsidebar = () => {
             ))
           }
 
+        </div>
+        {/* dummy datas   */}
+        <div className="item" >
+          <span>Suggestions For You</span>
+          
+
+              <div  className="user">
+                <div  className="userInfo">
+                  <img
+                    src="https://images.pexels.com/photos/4881619/pexels-photo-4881619.jpeg?auto=compress&cs=tinysrgb&w=1600"
+                    alt=""
+                  />
+                  <span >Akhil</span>
+                </div>
+                <div className="buttons">
+                  <Button colorScheme='blue'  >follow</Button>
+                </div>
+              </div>
+              <div  className="user">
+                <div  className="userInfo">
+                  <img
+                    src="https://images.pexels.com/photos/4881619/pexels-photo-4881619.jpeg?auto=compress&cs=tinysrgb&w=1600"
+                    alt=""
+                  />
+                  <span >Anandhu</span>
+                </div>
+                <div className="buttons">
+                  <Button colorScheme='blue'  >follow</Button>
+                </div>
+              </div>
+              <div  className="user">
+                <div  className="userInfo">
+                  <img
+                    src="https://images.pexels.com/photos/4881619/pexels-photo-4881619.jpeg?auto=compress&cs=tinysrgb&w=1600"
+                    alt=""
+                  />
+                  <span >Bibin</span>
+                </div>
+                <div className="buttons">
+                  <Button colorScheme='blue'  >follow</Button>
+                </div>
+              </div>
+              <div  className="user">
+                <div  className="userInfo">
+                  <img
+                    src="https://images.pexels.com/photos/4881619/pexels-photo-4881619.jpeg?auto=compress&cs=tinysrgb&w=1600"
+                    alt=""
+                  />
+                  <span >Jijo</span>
+                </div>
+                <div className="buttons">
+                  <Button colorScheme='blue'  >follow</Button>
+                </div>
+              </div>
+              <div  className="user">
+                <div  className="userInfo">
+                  <img
+                    src="https://images.pexels.com/photos/4881619/pexels-photo-4881619.jpeg?auto=compress&cs=tinysrgb&w=1600"
+                    alt=""
+                  />
+                  <span >Joel</span>
+                </div>
+                <div className="buttons">
+                  <Button colorScheme='blue'  >follow</Button>
+                </div>
+              </div>
+              <div  className="user">
+                <div  className="userInfo">
+                  <img
+                    src="https://images.pexels.com/photos/4881619/pexels-photo-4881619.jpeg?auto=compress&cs=tinysrgb&w=1600"
+                    alt=""
+                  />
+                  <span >Justins</span>
+                </div>
+                <div className="buttons">
+                  <Button colorScheme='blue'  >follow</Button>
+                </div>
+              </div>
+              <div  className="user">
+                <div  className="userInfo">
+                  <img
+                    src="https://images.pexels.com/photos/4881619/pexels-photo-4881619.jpeg?auto=compress&cs=tinysrgb&w=1600"
+                    alt=""
+                  />
+                  <span >Sumith</span>
+                </div>
+                <div className="buttons">
+                  <Button colorScheme='blue'  >follow</Button>
+                </div>
+              </div>
+              <div  className="user">
+                <div  className="userInfo">
+                  <img
+                    src="https://images.pexels.com/photos/4881619/pexels-photo-4881619.jpeg?auto=compress&cs=tinysrgb&w=1600"
+                    alt=""
+                  />
+                  <span >Sreekanth</span>
+                </div>
+                <div className="buttons">
+                  <Button colorScheme='blue'  >follow</Button>
+                </div>
+              </div>
+              <div  className="user">
+                <div  className="userInfo">
+                  <img
+                    src="https://images.pexels.com/photos/4881619/pexels-photo-4881619.jpeg?auto=compress&cs=tinysrgb&w=1600"
+                    alt=""
+                  />
+                  <span >Jojo</span>
+                </div>
+                <div className="buttons">
+                  <Button colorScheme='blue'  >follow</Button>
+                </div>
+              </div>
+              <div  className="user">
+                <div  className="userInfo">
+                  <img
+                    src="https://images.pexels.com/photos/4881619/pexels-photo-4881619.jpeg?auto=compress&cs=tinysrgb&w=1600"
+                    alt=""
+                  />
+                  <span >Bobin</span>
+                </div>
+                <div className="buttons">
+                  <Button colorScheme='blue'  >follow</Button>
+                </div>
+              </div>
+            
         </div>
 
 

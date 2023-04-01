@@ -83,16 +83,16 @@ function Friends() {
             <Card maxW='700px' paddingTop={50}>
                 {
                     follower || following ?
-                        <Tabs style={{ width: "50vh", height: '50vh', overflowY: 'scroll' }} isFitted variant='enclosed'>
+                        <Tabs style={{ width: "50vh", height: '50vh', overflowY: 'scroll', WebkitScrollSnapType:'none' }} isFitted variant='enclosed'>
                             <TabList mb='1em'>
                                 <Tab>Followers</Tab>
                                 <Tab>Following</Tab>
                             </TabList>
-                            <TabPanels>
+                            <TabPanels maxW={'600px'}>
                                 <TabPanel>
                                     <Stack direction='column'>
 
-                                        {follower.map((k, index) => (
+                                        {follower?follower.map((k, index) => (
                                             <>
                                                 <Flex key={index}>
                                                     <Box p='4' bg='white.400'>
@@ -114,14 +114,20 @@ function Friends() {
                                                     </Box>
                                                 </Flex>
                                             </>
-                                        ))}
+                                        )):
+                                        <>
+                                        <p>
+                                            nothing to show
+                                        </p>
+                                        </>
+                                        }
                                     </Stack>
 
                                 </TabPanel>
                                 <TabPanel>
 
                                     <Stack direction='column'>
-                                        {following.map((k, index) => (
+                                        {following?following.map((k, index) => (
                                             <>
                                                 <Flex key={index}>
                                                     <Box p='4' bg='white.400'>
@@ -146,7 +152,15 @@ function Friends() {
                                                     </Box>
                                                 </Flex>
                                             </>
-                                        ))}
+                                        ))
+                                        :
+                                        // null
+                                    <>
+                                    <p>
+                                        Nothing to show
+                                        </p>
+                                    </>
+                                    }
                                     </Stack>
                                 </TabPanel>
                             </TabPanels>

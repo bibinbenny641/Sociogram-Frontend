@@ -87,14 +87,10 @@ function RegisterPage() {
       let data = await response.json()
       console.log(data)
       if (response.status === 400) {
-        console.log("errir");
-
-        console.log("400");
         generateError(data)
         // navigate('/register')
       } else
         if (response.status === 200) {
-          console.log("200");
           // navigate('/login')
           setOtp(true)
           // generatesucces("Registration Success")

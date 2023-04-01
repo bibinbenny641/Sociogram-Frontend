@@ -76,7 +76,7 @@ function Suggestions() {
                     <CardBody>
                         <Heading size={'md'}>{i.fullname}</Heading>
                         {i.user_name?
-                        <Text >{i.user_name}</Text>
+                        <Text key={index} >{i.user_name}</Text>
                         :<Text>.</Text>
                         }
                     </CardBody>

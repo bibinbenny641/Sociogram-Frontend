@@ -15,7 +15,6 @@ export const AuthProvider = ({children}) =>{
         })
 
     let [user,setUser] = useState( localStorage.getItem('authTokens') ?(jwt_decode(JSON.parse(localStorage.getItem('authTokens')).access)):null)
-    console.log(user)
     let [authTokens,setAuthTokens] = useState(()=> localStorage.getItem('authTokens') ? jwt_decode(localStorage.getItem('authTokens')):null)
     
     let [currentuser,setCurrentuser] = useState(user?.user_id)
@@ -30,6 +29,7 @@ export const AuthProvider = ({children}) =>{
     const [isopen,setIsopen] = useState(false)
     const [result,setResult]=useState([''])
   const [caption,setCaption] = useState([])
+  const [isedited,setIsedited] = useState(false)
   const url = 'https://www.sociogram.online'
     // const url = 'http://127.0.0.1:8000'
 
@@ -41,7 +41,6 @@ export const AuthProvider = ({children}) =>{
 
     let loginUser = async(e)=>{
         e.preventDefault()
-        console.log("form submitted")
         
         let response = await fetch(url+'/api/token/',{
             method : 'POST',
@@ -57,9 +56,7 @@ export const AuthProvider = ({children}) =>{
             setUser(jwt_decode(data.access))
             let c=jwt_decode(data.access)
             
-            console.log(data)
             if(c.is_active===true){
-                console.log(c.is_active)
                 localStorage.setItem('authTokens',JSON.stringify(data))
                 navigate("/",{replace:true})
 
@@ -86,7 +83,6 @@ export const AuthProvider = ({children}) =>{
 
     let loginAdmin = async(e)=>{
         e.preventDefault()
-        console.log("admin form submitted")
         let response = await fetch(url+'/api/token/',{
             method : 'POST',
             headers:{

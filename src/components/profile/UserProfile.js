@@ -264,7 +264,7 @@ function UserProfile() {
             <Avatar
               size={'xl'}
               src={
-                'https://cdn-icons-png.flaticon.com/512/21/21104.png'
+                'https://www.pngall.com/wp-content/uploads/5/Profile-Male-PNG.png'
               }
               alt={'Avatar Alt'}
               mb={4}

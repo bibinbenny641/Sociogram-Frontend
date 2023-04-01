@@ -1,9 +1,7 @@
 
 
 const Validation = (values)=> {
-    console.log("bbbbbbbbbbbbbbb")
     let errors= { };
-    console.log(values);
     if(!values.fullname){
         errors.fullname="Name is required"
     }

@@ -1,17 +1,14 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { useState } from 'react'
 import AuthContext from '../../../context/AuthContext'
 import { toast } from "react-toastify";
 
 
-function EditComment({com,editComment,comm,datas,setDatas,foll}) {
+function EditComment({com,editComment,comm,datas,setDatas,foll,isedited,setIsedited},openEdit) {
   let { caption,setCaption,url } = useContext(AuthContext)
   let [authTokens, setAuthTokens] = useState(() => localStorage.getItem('authTokens') ? localStorage.getItem('authTokens') : null)
 
 
-
-   
-    
     let handleChange = (e)=>{
         setDatas(
           
@@ -27,8 +24,6 @@ function EditComment({com,editComment,comm,datas,setDatas,foll}) {
             [e.target.name]:e.target.value})
       }
       let editPost = async (id) => {
-        console.log(id,'333')
-        console.log(caption,'22222')
         let response = await fetch(url+`/follow/editpost/${id}/`, {
           method: 'PATCH', 
           headers: {
@@ -43,12 +38,20 @@ function EditComment({com,editComment,comm,datas,setDatas,foll}) {
         if (response.status === 200) {
           caption.comment=''
           toast.success('Edit success')
+          setIsedited(!isedited)
+          openEdit()
+
         } else {
           // logoutUser()
           alert('failed')
     
         }
       }
+      useEffect(() => {
+      
+        
+      }, [caption])
+      
       
     
   return (

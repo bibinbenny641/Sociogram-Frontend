@@ -22,7 +22,6 @@ function ChatDetail() {
   const [messages, setMessages] = useState([])
   const [message, setMessage] = useState([])
   const [isTrue, setIsTrue] = useState(false)
-  console.log('message', messages)
   const socketRef = useRef(null);
   let room = roomid.id
   const bottomRef = useRef(null);
@@ -39,7 +38,6 @@ function ChatDetail() {
     let data = await response.json()
 
     if (response.status === 200) {
-      console.log(data, 'hhdhdhdhd')
       setMessages(data)
 
     } else {
@@ -62,7 +60,6 @@ function ChatDetail() {
   useEffect(() => {
     get_messages()
   }, [room, isTrue]);
-  console.log(messages, 'aaaaaaaaaaaaaaaaaaaa')
 
   //   const [messages, setMessages] = useState(messagesData);
   //   const [typing, setTyping] = useState(false);
@@ -77,7 +74,6 @@ function ChatDetail() {
     get_messages()
   };
   const backtohome = () => {
-    console.log('its working')
     setIsopen(false)
   }
 
